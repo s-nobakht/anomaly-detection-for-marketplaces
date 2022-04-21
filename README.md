@@ -67,8 +67,9 @@ Based on the features we found in the previous section, we want to provide a mod
 The issue of dimensionality is always present in issues related to data and machine learning. The problem of dimensionality is considered from two approaches; The first approach is to reduce the number of features and the second approach is to reduce the number of examples that do not have a significant or positive effect on the problem process. Note that in these analyzes, data related to apps that have less than average orders (1 to 3 purchases) are not considered. Reducing the number of samples in clustering problems, especially when hierarchical methods are used, can lead to a significant reduction in space and time spent in the calculation.
 
 ### 2-1-2- Evaluation criteria
-There are several criteria for evaluating clustering. Intuitively, the smaller the internal distance between samples in a cluster and the greater the distance between the centers of the clusters in the problem space, results in clustering because the data are better separated from each other and placed in denser clusters. The goal is to reduce the internal variance of the clusters. The MSE criterion calculates the internal variance of the cluster. Therefore, good separation clustering algorithms should minimize MSE. How to calculate MSE is as follows:
-![MSE Formula](https://render.githubusercontent.com/render/math?math=MSE=\ \ 1/N\ \ \sum_(j=1)^k\of\sum_(x\in C_j)\of‖x-m_k ‖^2)
+There are several criteria for evaluating clustering. Intuitively, the smaller the internal distance between samples in a cluster and the greater the distance between the centers of the clusters in the problem space, results in clustering because the data are better separated from each other and placed in denser clusters. The goal is to reduce the internal variance of the clusters. The MSE criterion calculates the internal variance of the cluster. Therefore, good separation clustering algorithms should minimize MSE. How to calculate MSE is as follows:<br />
+
+![MSE Formula]("https://render.githubusercontent.com/render/math?math=MSE=\ \ 1/N\ \ \sum_(j=1)^k\of\sum_(x\in C_j)\of‖x-m_k ‖^2")
 
 ### 2-1-3- Clustering method
 
