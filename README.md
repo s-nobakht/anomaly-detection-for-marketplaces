@@ -97,7 +97,7 @@ In general, we have the relation ![D_ij=](https://render.githubusercontent.com/r
 
 [comment]: <> (![DBI_R_k]&#40;figures/formulas/DBI-R-k.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" height="50">
+    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" height="40">
 </div>
 
 DBI is now defined as follows:
@@ -139,7 +139,7 @@ In the following, we present the results of clustering and examine each of the a
 
 Using the K-Means method, we performed clustering operations for 2 clusters and evaluated the clusters using the Silhouette index. Figure 2 shows the cluster status based on the similarity of the cityblock criterion. As can be seen, there are a significant number of samples in both clusters. Therefore, it can be said that this clustering has not worked well.
 
-![Figure 2 1 - K-Means results with cityblock criteria](figures/clustering_figures/clustering_cityblock_2.png)
+![Figure 2 1 - K-Means results with cityblock criteria](figures/clustering_figures/clustering_cityblock_2.png =250x)
 <div align="center">
   Figure 2-1- K-Means results with cityblock criteria 
 </div>
