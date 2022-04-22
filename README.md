@@ -1,5 +1,5 @@
 # Anomaly Detection in Marketplaces
-A project for addressing anomaly detection practices in Matlab for marketplace platforms.
+A project for addressing classical anomaly detection practices in Matlab for marketplace platforms.
 
 # Section 1- Review of the problem and data
 ## 1-1- Problem definition
@@ -34,7 +34,7 @@ Here, to get a more accurate model, we exclude the apps with one purchase from t
 | ![id=49365, purchases=220, rank=19](figures/hists/49365_220_19.png)   | ![id=1196204, purchases=217, rank=20](figures/hists/1196204_217_20.png)     |     |
 
 <div align="center">
-  Figure.1 20-app histogram has the most orders in time (seconds). 
+  <b>Figure-1-1- 20-app histogram has the most orders in time (seconds).</b> 
 </div>
 
 The purpose of drawing an app histogram is to understand the status of available data by looking at how the distribution of each app's purchases is on the chart. The fundamental question is whether the distribution of orders for each app can be approximated by a pattern (for example, a Gaussian distribution). The behavior of some apps, such as apps with rankings of 3, 4, 8, etc., is not dissimilar to the Gaussian distribution, but it is less common in other apps. The point to note here is that the number of bins or cylinders considered in all diagrams is equal to 40. But each cylinder in each graph represents a period that is not necessarily the same as the other graph; this is because in plotting a histogram, the whole interval is divided by the number of bins, and the order intervals of the apps are different.
@@ -42,7 +42,7 @@ Another issue is the existence of a time parameter. We want a general model for 
 
 
 ## 1-4- The second attempt
-As mentioned in the diagrams in Figure 1., the order time is considered an essential feature. However, other features can be defined based on the problem, and the apps' behavior can be deemed to be based on them. Since our goal is to detect apps with suspicious behavior and the only fundamental feature available is when to order each app, we try to help new features identify as many suspicious apps as possible. For this purpose, we use heuristics that come to mind based on the data and the subject matter.
+As mentioned in the diagrams in Figure 1-1, the order time is considered an essential feature. However, other features can be defined based on the problem, and the apps' behavior can be deemed to be based on them. Since our goal is to detect apps with suspicious behavior and the only fundamental feature available is when to order each app, we try to help new features identify as many suspicious apps as possible. For this purpose, we use heuristics that come to mind based on the data and the subject matter.
 
 ### 1-4-1- Extracting new features
 To extract new features, heuristics, and additional information that may be useful to us are as follows:
@@ -139,16 +139,22 @@ In the following, we present the results of clustering and examine each of the a
 
 Using the K-Means method, we performed clustering operations for 2 clusters and evaluated the clusters using the Silhouette index. Figure 2 shows the cluster status based on the similarity of the cityblock criterion. As can be seen, there are a significant number of samples in both clusters. Therefore, it can be said that this clustering has not worked well.
 
-![Figure 2 1 - K-Means results with cityblock criteria](figures/clustering_figures/clustering_cityblock_2.png =250x)
+[comment]: <> (![Figure 2 1 - K-Means results with cityblock criteria]&#40;figures/clustering_figures/clustering_cityblock_2.png&#41;)
 <div align="center">
-  Figure 2-1- K-Means results with cityblock criteria 
+  <img src="./figures/clustering_figures/clustering_cityblock_2.png" alt="Figure 2-1- K-Means results with cityblock criteria" width="400"> 
+</div>
+<div align="center">
+  <b>Figure 2-1- K-Means results with cityblock criteria</b> 
 </div>
 
 In Figure 2-2., the same clustering is performed with the Euclidean distance squared criterion. The situation of the clusters has improved a little according to our goals, but it is still far from our ideal. There are still a large number of samples in both clusters, which is not a good cluster for the problem of detecting suspicious apps.
 
-![Figure 2 2 - K-Means results with sqeuclidean criterion](figures/clustering_figures/clustering_euclidean_2.png)
+[comment]: <> (![Figure 2 2 - K-Means results with sqeuclidean criterion]&#40;figures/clustering_figures/clustering_euclidean_2.png&#41;)
 <div align="center">
-  Figure 2-2- K-Means results with sq-euclidean criterion 
+  <img src="./figures/clustering_figures/clustering_euclidean_2.png" alt="Figure 2-2- K-Means results with sq-euclidean criterion" width="400"> 
+</div>
+<div align="center">
+  <b>Figure 2-2- K-Means results with sq-euclidean criterion</b> 
 </div>
 
 Figure 2-3 shows a representation of the same K-Means, this time with a correlation similarity criterion. As can be seen, approximately 99% of the data is in one cluster and the other 1% is in another cluster. This arrangement of data in clusters can be a good answer to our problem.
@@ -157,14 +163,20 @@ In Figure 2-4, another similarity criterion, the cosine distance similarity crit
 
 It is very important to pay attention to this point. The K-Means algorithm is significantly dependent on the initial values. Therefore, different results may be obtained by performing the algorithm several times for different similarity criteria. As here, for the Euclidean distance criterion, the results were slightly different each time. For this purpose, the K-Means algorithm is executed 5 times for all distance criteria and the best result of each is considered. Nevertheless, it seems that the correlation distance criterion still provides better clustering.
 
-![Figure 2 3 - K-Means results with correlation criteria](figures/clustering_figures/clustering_correlation_2.png)
+[comment]: <> (![Figure 2 3 - K-Means results with correlation criteria]&#40;figures/clustering_figures/clustering_correlation_2.png&#41;)
 <div align="center">
-  Figure 2-3- K-Means results with correlation criteria 
+  <img src="./figures/clustering_figures/clustering_correlation_2.png" alt="Figure 2-2- K-Means results with correlation criteria" width="400"> 
+</div>
+<div align="center">
+  <b>Figure 2-3- K-Means results with correlation criteria</b> 
 </div>
 
-![Figure 2 4 - K-Means results with cosine distance criterion](figures/clustering_figures/clustering_cosine_2.png)
+[comment]: <> (![Figure 2 4 - K-Means results with cosine distance criterion]&#40;figures/clustering_figures/clustering_cosine_2.png&#41;)
 <div align="center">
-  Figure 2-4- K-Means results with cosine distance criterion 
+  <img src="./figures/clustering_figures/clustering_cosine_2.png" alt="Figure 2-2- K-Means results with cosine distance criterion" width="400"> 
+</div>
+<div align="center">
+  <b>Figure 2-4- K-Means results with cosine distance criterion</b> 
 </div>
 
 With this approach, approximately 1% of apps will be classified as suspicious apps. This is equivalent to approximately 160 apps in the data set used for clustering.
@@ -212,7 +224,7 @@ If we draw the histogram of the first feature, it will be as shown in Figure 2-5
 | ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_5.png)   | ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_6.png)     |
 
 <div align="center">
-    Figure 2-5- Histogram of defined features
+    <b>Figure 2-5- Histogram of defined features</b>
 </div>
 
 First we use the log conversion and instead of the attribute, we consider its log. The results are shown in Figure 2-6. As shown in the figure, the state of the properties has improved somewhat and is closer to the normal distribution.
@@ -224,7 +236,7 @@ First we use the log conversion and instead of the attribute, we consider its lo
 | ![log-features, num-3](figures/features_figures/log/Feature_Number_5.png)   | ![log-features, num-3](figures/features_figures/log/Feature_Number_6.png)     |
 
 <div align="center">
-    Figure 2-6- Histogram of the properties defined by applying log conversion
+    <b>Figure 2-6- Histogram of the properties defined by applying log conversion</b>
 </div>
 
 Next, we try to convert the square root or the power of 0.5. The results are shown in Figure 2-7. As it turns out, using this converter has not been very useful.
@@ -236,7 +248,7 @@ Next, we try to convert the square root or the power of 0.5. The results are sho
 | ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_5.png)   | ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_6.png)     |
 
 <div align="center">
-    Figure 2-7- Histogram of the properties defined by applying pow(x, 0.5) conversion 
+    <b>Figure 2-7- Histogram of the properties defined by applying pow(x, 0.5) conversion</b> 
 </div>
 
 Other values ​​have also been tested in implementation. The results of these tests and their form are available in the figures directory. Here we will confine ourselves to the same log conversion that gave a better result. In converting logs to values, we add a small value of 0.001 to prevent some elements close to zero from becoming infinite. These values ​​have no effect on the overall problem and the normal distribution.
