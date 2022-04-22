@@ -1,4 +1,4 @@
-# anomaly-detection-for-marketplaces
+# Anomaly Detection in Marketplaces
 A project for addressing anomaly detection practices in Matlab for marketplace platforms.
 
 # Section 1- Review of the problem and data
@@ -23,9 +23,6 @@ Therefore, the period discussed for applications is approximately 212 (approxima
 Based on these statistics and their frequency, there are some interesting points. For example, we have 55,143 apps that have only been ordered once! Approximately 83.9% of apps have lower than average purchases. In other words, given that the average number of orders here is 3,034, an enormous volume of apps have only been ordered 1 to 3 times. Apps that are so unpopular do not seem to be of much help in reaching a model for detecting suspicious apps. Apps with this small number of orders are probably just commissioned by the developer.
 Here, to get a more accurate model, we exclude the apps with one purchase from the data set so that the behavior of the other apps can be better considered. To better understand the subject, we include the top apps that have more purchases in our considerations. For example, in Figure 1., the top 20 apps are considered, and their purchase histogram chart is drawn based on the time.
 
-<div align="center">
-  Figure.1 20-app histogram has the most orders in time (seconds). 
-</div>
 
 | ![id=6499, purchases=721, rank=1](figures/hists/6499_721_1.png)   | ![id=424300, purchases=488, rank=2](figures/hists/424300_488_2.png)     | ![id=16806, purchases=465, rank=3](figures/hists/16806_465_3.png)    |
 | :---         |     :---:      |          ---: |
@@ -35,6 +32,10 @@ Here, to get a more accurate model, we exclude the apps with one purchase from t
 | ![id=12281, purchases=281, rank=13](figures/hists/12281_281_13.png)   | ![id=27292, purchases=275, rank=14](figures/hists/27292_275_14.png)     | ![id=51554, purchases=245, rank=15](figures/hists/51554_245_15.png)    |
 | ![id=1227, purchases=233, rank=16](figures/hists/1227_233_16.png)   | ![id=18966, purchases=233, rank=17](figures/hists/18966_233_17.png)     | ![id=63719, purchases=226, rank=18](figures/hists/63719_226_18.png)    |
 | ![id=49365, purchases=220, rank=19](figures/hists/49365_220_19.png)   | ![id=1196204, purchases=217, rank=20](figures/hists/1196204_217_20.png)     |     |
+
+<div align="center">
+  Figure.1 20-app histogram has the most orders in time (seconds). 
+</div>
 
 The purpose of drawing an app histogram is to understand the status of available data by looking at how the distribution of each app's purchases is on the chart. The fundamental question is whether the distribution of orders for each app can be approximated by a pattern (for example, a Gaussian distribution). The behavior of some apps, such as apps with rankings of 3, 4, 8, etc., is not dissimilar to the Gaussian distribution, but it is less common in other apps. The point to note here is that the number of bins or cylinders considered in all diagrams is equal to 40. But each cylinder in each graph represents a period that is not necessarily the same as the other graph; this is because in plotting a histogram, the whole interval is divided by the number of bins, and the order intervals of the apps are different.
 Another issue is the existence of a time parameter. We want a general model for apps with which to identify suspicious apps, while each app has its behavior over time. Therefore, it seems that this feature is raw, and we should look for features that include the effect of installation number and time.
@@ -73,7 +74,7 @@ There are several criteria for evaluating clustering. Intuitively, the smaller t
 
 [comment]: <> (![MSE Formula]&#40;figures/formulas/MSE-formula.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/MSE-formula.png" alt="MSE Formula" width="50%">
+    <img src="./figures/formulas/MSE-formula.png" alt="MSE Formula" height="50">
 </div>
 
 Here ![k](https://render.githubusercontent.com/render/math?math=k) is the number of clusters and ![m_k](https://render.githubusercontent.com/render/math?math=m_k) is the average of the ![C_k](https://render.githubusercontent.com/render/math?math=C_k) cluster.
@@ -82,28 +83,28 @@ Another indicator that can be used here is the [Davies–Bouldin Index](https://
 
 [comment]: <> (![R_ij]&#40;figures/formulas/DBI-Partition.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI-Partition.png" alt="DBI, Partition" width="50%">
+    <img src="./figures/formulas/DBI-Partition.png" alt="DBI, Partition" height="50">
 </div>
 
 Where ![e_i](https://render.githubusercontent.com/render/math?math=e_i) and ![e_j](https://render.githubusercontent.com/render/math?math=e_j) are the average scattering of the clusters ![C_i](https://render.githubusercontent.com/render/math?math=C_i) and ![C_j](https://render.githubusercontent.com/render/math?math=C_j), and ![D_ij](https://render.githubusercontent.com/render/math?math=D_{ij}) is the Euclidean distance between ![C_i](https://render.githubusercontent.com/render/math?math=C_i) and ![C_j](https://render.githubusercontent.com/render/math?math=C_j). If ![m_i](https://render.githubusercontent.com/render/math?math=m_i) and ![m_j](https://render.githubusercontent.com/render/math?math=m_j) are the centers of the  ![C_i](https://render.githubusercontent.com/render/math?math=C_i) and ![C_j](https://render.githubusercontent.com/render/math?math=C_j) clusters, respectively, then we have:
 
 [comment]: <> (![DBI_e_i]&#40;figures/formulas/DBI-avg.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI-avg.png" alt="DBI, avg" width="50%">
+    <img src="./figures/formulas/DBI-avg.png" alt="DBI, avg" height="50">
 </div>
 
 In general, we have the relation ![D_ij=](https://render.githubusercontent.com/render/math?math=D_{ij}={||m_i-m_k||}^2) where ![m_i](https://render.githubusercontent.com/render/math?math=m_i) is the center of the ![C_j](https://render.githubusercontent.com/render/math?math=C_j) cluster containing ![N_i](https://render.githubusercontent.com/render/math?math=N_i) point (sample). The expression ![R_k](https://render.githubusercontent.com/render/math?math=R_k) for each ![C_k](https://render.githubusercontent.com/render/math?math=C_k) is as follows:
 
 [comment]: <> (![DBI_R_k]&#40;figures/formulas/DBI-R-k.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" width="50%">
+    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" height="50">
 </div>
 
 DBI is now defined as follows:
 
 [comment]: <> (![DBI]&#40;figures/formulas/DBI.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI.png" alt="DBI" width="50%">
+    <img src="./figures/formulas/DBI.png" alt="DBI" height="50">
 </div>
 
 Where ![k](https://render.githubusercontent.com/render/math?math=k) is the number of clusters. DBI, cluster dispersion, takes into account the distance between the average clusters. Separate and compact clusters are preferred. DBI favors a small number of clusters. DBI optimization mainly eliminates clusters by forcing them to empty.
@@ -179,17 +180,107 @@ Therefore, to solve this problem with these data sets and existing requirements,
 
 In this case, there are two approaches, which we will examine in the following.
 
-
-
-
-
 ### 2-2-1- Gaussian model assuming the independence of features
+Here, if we assume that the properties are independent of each other and do not consider their dependencies and relationships, we want to arrive at the model <img alt="normal distribution" src="https://render.githubusercontent.com/render/math?math=P(x; {\mu} , {\sigma}^2)">. Here <img alt="x" src="https://render.githubusercontent.com/render/math?math=x"> is the input sample and <img alt="mu" src="https://render.githubusercontent.com/render/math?math=\mu"> and <img alt="sigma^2" src="https://render.githubusercontent.com/render/math?math={\sigma}^2"> are the mean and variance parameters of the model, respectively, which we want to estimate to detect suspicious apps from the data. For this purpose, we assume that each property has a normal distribution and first estimate the mean and variance parameters for each property and then obtain the model <img alt="P" src="https://render.githubusercontent.com/render/math?math=P"> from the following equation:
+
+<div align="center">
+    <img src="./figures/formulas/independent-gaussian.png" alt="independent gaussian" height="30">
+</div>
+
+Since <img alt="P" src="https://render.githubusercontent.com/render/math?math=P"> is a Gaussian distribution, after estimating <img alt="P" src="https://render.githubusercontent.com/render/math?math=P"> its values for each <img alt="x" src="https://render.githubusercontent.com/render/math?math=x"> input can be calculated from the following equation:
+
+<div align="center">
+    <img src="./figures/formulas/gaussian-dist.png" alt="gaussian distribution" height="50">
+</div>
+
+After fitting the model parameters, we give a new sample to the model. If the output of the model is less than the <img alt="epsilon" src="https://render.githubusercontent.com/render/math?math=\epsilon"> threshold, the sample is suspicious, and if it is greater than or equal to, the sample is normal. The threshold is usually set by trial and error or based on labeled data and is around 0.0001 to 0.1. If we have labeled data, we can obtain the appropriate <img alt="epsilon" src="https://render.githubusercontent.com/render/math?math=\epsilon"> value using the F-criterion.
+
+Another point is that in selecting properties, if the distribution of properties is not similar to or close to the normal distribution, one should try to bring it close to the normal distribution with transformations such as log and so on. In the following, we will review the available features. To remind these features are:
+
++ Average order of each app for the time period with the time unit of the day at the active time
++ Average order of each app for the time period with the time unit of the day at the time of inactivity
++ Variance of ordering each app for the time interval with the unit of time of day in active time
++ The variance of ordering each app for the time interval with the time unit of the day at the time of inactivity
++ The ratio of the number of days in which overnight shopping took place to the total number of days
++ Ratio of overnight purchases to total purchases
+
+If we draw the histogram of the first feature, it will be as shown in Figure 2-5. As shown in the figure, the diagram for none of the properties is similar to the diagram of a normal distribution. In the following, we try to bring the shape of the graphs closer to the normal distribution with transformations such as logarithm, root, and so on.
+
+| ![original-features, num-1](figures/features_figures/orginal_features/Feature_Number_1.png)   | ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_2.png)     |
+| :---         |     :---:      | 
+| ![original-features, num-2](figures/features_figures/orginal_features/Feature_Number_3.png)   | ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_4.png)     |
+| ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_5.png)   | ![original-features, num-3](figures/features_figures/orginal_features/Feature_Number_6.png)     |
+
+<div align="center">
+    Figure 2-5- Histogram of defined features
+</div>
+
+First we use the log conversion and instead of the attribute, we consider its log. The results are shown in Figure 2-6. As shown in the figure, the state of the properties has improved somewhat and is closer to the normal distribution.
+
+
+| ![log-features, num-1](figures/features_figures/log/Feature_Number_1.png)   | ![log-features, num-3](figures/features_figures/log/Feature_Number_2.png)     |
+| :---         |     :---:      | 
+| ![log-features, num-2](figures/features_figures/log/Feature_Number_3.png)   | ![log-features, num-3](figures/features_figures/log/Feature_Number_4.png)     |
+| ![log-features, num-3](figures/features_figures/log/Feature_Number_5.png)   | ![log-features, num-3](figures/features_figures/log/Feature_Number_6.png)     |
+
+<div align="center">
+    Figure 2-6- Histogram of the properties defined by applying log conversion
+</div>
+
+Next, we try to convert the square root or the power of 0.5. The results are shown in Figure 2-7. As it turns out, using this converter has not been very useful.
+
+
+| ![pow_0.5-features, num-1](figures/features_figures/pow_0.5/Feature_Number_1.png)   | ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_2.png)     |
+| :---         |     :---:      | 
+| ![pow_0.5-features, num-2](figures/features_figures/pow_0.5/Feature_Number_3.png)   | ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_4.png)     |
+| ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_5.png)   | ![pow_0.5-features, num-3](figures/features_figures/pow_0.5/Feature_Number_6.png)     |
+
+<div align="center">
+    Figure 2-7- Histogram of the properties defined by applying pow(x, 0.5) conversion 
+</div>
+
+Other values ​​have also been tested in implementation. The results of these tests and their form are available in the figures directory. Here we will confine ourselves to the same log conversion that gave a better result. In converting logs to values, we add a small value of 0.001 to prevent some elements close to zero from becoming infinite. These values ​​have no effect on the overall problem and the normal distribution.
+To adjust the model parameters, we must form three sets: Train, Validation and Test. The train set is selected equal to 60% of the data set, almost all of which are normal. The Test and Validation sets each contain 20% of the samples. Each of the Test and Validation sets also contains a small amount of suspicious data (at least 10). We use the Train set to estimate the model parameters (mean and variance) and the Validation set to check the selection of the best value for the threshold value. To check the error, we use the F criterion (specifically F1) on the Validation set.
+
+<div align="center">
+    <img src="./figures/formulas/F1-measure.png" alt="F1 Measure" height="50">
+</div>
+
+The closer the F1 criterion is to 1, the better our algorithm performed. The following is part of the program output. Here we first select the best threshold value that maximizes the F1 criterion based on a number of candidate threshold values in the Validation dataset. Next, by testing the obtained model on the test data set, we evaluate the Generalize capability of our model. As can be seen with almost the same quality, the model also performs well during testing. Better models can be achieved by better adjusting the parameters.
+
+```
+Estimating model prameters...Done
+Estimating best threshold ...
+--> Threshlod=0.000100, F1=0.900617
+330 fprintf('==> Best Threshlod=%f, Best F1=%f\n',best_threshold, max_f1);
+==> Best Threshlod=0.000100, Best F1=0.900617
+Testing Model on Test Set ...
+--> Model Results on Test Set: F1=0.908141
+```
+
 
 ### 2-2-2- Multivariate Gaussian model
+This mode is the general mode of the Gaussian model, and the previous mode is in fact a specific mode of the multivariate Gaussian model. The advantage of this method is that correlation between features is also considered in this case. Model P in this case is obtained from the following equation:
 
+<div align="center">
+    <img src="./figures/formulas/multivariate-gaussian.png" alt="Multivariate Gaussian Distribution" height="50">
+</div>
+
+In this relation <img src="https://render.githubusercontent.com/render/math?math=\Sigma"> is the covariance matrix.
+In this method, the appropriate value of <img src="https://render.githubusercontent.com/render/math?math=\epsilon"> can be obtained again using the F-criterion. The output of the method based on the F1 criterion is as follows. As can be seen, the difference between this method and the previous method is very small. Even the threshold values are quite similar. This may indicate that the selected features are well-designed.
+
+```
+Estimating model_2 prameters...Done
+Estimating best threshold ...
+--> Threshlod=0.000100, F1=0.895207
+==> Best Threshlod=0.000100, Best F1=0.895207
+370 fprintf('Testing model_2 on Test Set ...\n');
+Testing model_2 on Test Set ...
+--> Model_2 Results on Test Set: F1=0.893594
+```
 
 ## 2-2-3- Error analysis in methods
-In order to evaluate the performance of the model and make the necessary corrections to other features and parameters, we must provide a method for evaluating the proposed model. By default, labeled data should be used here. Of course, because datasets often contain normal data, we need a small amount of suspiciously labeled data to evaluate. In each approach approach there is a need for evaluation.
+In order to evaluate the performance of the model and make the necessary corrections to other features and parameters, we must provide a method for evaluating the proposed model. By default, labeled data should be used here. Of course, because datasets often contain normal data, we need a small amount of suspiciously labeled data to evaluate. In each approach there is a need for evaluation.
 
 Since there is no labeled data in the data set, two approaches can be considered. First, it added a number of suspiciously labeled data to the system and used them to fit the model. Since the definition of suspicious data is not yet definitive, this method is associated with ifs and buts.
 
