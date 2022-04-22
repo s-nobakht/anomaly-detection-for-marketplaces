@@ -97,7 +97,7 @@ In general, we have the relation ![D_ij=](https://render.githubusercontent.com/r
 
 [comment]: <> (![DBI_R_k]&#40;figures/formulas/DBI-R-k.png&#41;)
 <div align="center">
-    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" height="40">
+    <img src="./figures/formulas/DBI-R-k.png" alt="DBI, Rk" height="30">
 </div>
 
 DBI is now defined as follows:
@@ -193,7 +193,7 @@ Therefore, to solve this problem with these data sets and existing requirements,
 In this case, there are two approaches, which we will examine in the following.
 
 ### 2-2-1- Gaussian model assuming the independence of features
-Here, if we assume that the properties are independent of each other and do not consider their dependencies and relationships, we want to arrive at the model <img alt="normal distribution" src="https://render.githubusercontent.com/render/math?math=P(x; {\mu} , {\sigma}^2)">. Here <img alt="x" src="https://render.githubusercontent.com/render/math?math=x"> is the input sample and <img alt="mu" src="https://render.githubusercontent.com/render/math?math=\mu"> and <img alt="sigma^2" src="https://render.githubusercontent.com/render/math?math={\sigma}^2"> are the mean and variance parameters of the model, respectively, which we want to estimate to detect suspicious apps from the data. For this purpose, we assume that each property has a normal distribution and first estimate the mean and variance parameters for each property and then obtain the model <img alt="P" src="https://render.githubusercontent.com/render/math?math=P"> from the following equation:
+Here, if we assume that the properties are independent of each other and do not consider their dependencies and relationships, we want to arrive at the model <img alt="normal distribution" src="https://render.githubusercontent.com/render/math?math=P(x%3B\mu,\,\sigma^{2})">. Here <img alt="x" src="https://render.githubusercontent.com/render/math?math=x"> is the input sample and <img alt="mu" src="https://render.githubusercontent.com/render/math?math=\mu"> and <img alt="sigma^2" src="https://render.githubusercontent.com/render/math?math={\sigma}^2"> are the mean and variance parameters of the model, respectively, which we want to estimate to detect suspicious apps from the data. For this purpose, we assume that each property has a normal distribution and first estimate the mean and variance parameters for each property and then obtain the model <img alt="P" src="https://render.githubusercontent.com/render/math?math=P"> from the following equation:
 
 <div align="center">
     <img src="./figures/formulas/independent-gaussian.png" alt="independent gaussian" height="30">
